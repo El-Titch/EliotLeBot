@@ -1,9 +1,4 @@
-import discord
-from itertools import cycle
 from discord.ext import commands, tasks
-
-client = commands.Bot(command_prefix = '.')
-playing = cycle(['Status 1', 'Status 2'])
 
 
 class Status(commands.Cog):
