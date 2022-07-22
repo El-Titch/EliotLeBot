@@ -51,5 +51,5 @@ class Tomp3(commands.Cog):
                 os.remove(f'./{filename}')
             
 
-def setup(client):
-    client.add_cog(Tomp3(client))
+async def setup(client):
+   await client.add_cog(Tomp3(client))

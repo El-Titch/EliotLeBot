@@ -3,10 +3,6 @@ import discord
 from discord.ext import commands
 
 
-client = commands.Bot(command_prefix = '.')
-
-
-
 class Start(commands.Cog):
 
     def __init__(self, client):
@@ -34,8 +30,8 @@ class Start(commands.Cog):
 
 
 
-def setup(client):
-    client.add_cog(Start(client))
+async def setup(client):
+   await client.add_cog(Start(client))
  
 
 

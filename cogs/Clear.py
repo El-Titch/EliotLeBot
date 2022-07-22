@@ -13,6 +13,6 @@ class Clear(commands.Cog):
         await ctx.channel.purge(limit=amount+1)
         
 
-def setup(client):
-    client.add_cog(Clear(client))
+async def setup(client):
+    await client.add_cog(Clear(client))
   

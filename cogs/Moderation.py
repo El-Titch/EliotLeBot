@@ -53,7 +53,7 @@ class Moderation(commands.Cog):
 
     @commands.command(aliases=['Unban'])
     @commands.has_permissions(ban_members=True)
-    async def unban(self, ctx, *, member):
+    async def unban(self, ctx, *, member: commands.MemberConverter):
         user = await commands.UserConverter().convert(ctx, member)
         if user is None:
             id_ = await commands.IDConverter().convert(str(member))
@@ -88,5 +88,5 @@ class Moderation(commands.Cog):
         
         
 
-def setup(client):
-    client.add_cog(Moderation(client))
+async def setup(client):
+    await client.add_cog(Moderation(client))

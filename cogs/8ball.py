@@ -1,17 +1,16 @@
-import discord
 import random
 from discord.ext import commands
 
 client = commands.Bot
 
-class _8ball(commands.Cog): 
+
+class _8ball(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=['8ball'])
-
-    async def _8ball(self, ctx, *, question):
+    async def _8ball(self, *, question):
         responses = ["C'est certain.",
                  "C'est décidément ainsi",
                  'Sans aucun doute.',
@@ -34,5 +33,5 @@ class _8ball(commands.Cog):
         await channel.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
 
 
-def setup(client):
-    client.add_cog(_8ball(client))
+async def setup(client):
+    await client.add_cog(_8ball(client))
