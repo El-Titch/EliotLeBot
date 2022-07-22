@@ -16,7 +16,7 @@ class PermissionsChecker(commands.Cog):
         perms = '\n'.join(perm for perm, value in member.guild_permissions if value)
 
         # And to make it look nice, we wrap it in an Embed.
-        embed = discord.Embed(title='Permissions for:', description=ctx.guild.name, colour=member.colour)
+        embed = discord.Embed(title='Permissions fr:', description=ctx.guild.name, colour=member.colour)
         embed.set_author(icon_url=member.avatar_url, name=str(member))
 
         # \uFEFF is a Zero-Width Space, which basically allows us to have an empty field name.
