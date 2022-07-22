@@ -9,7 +9,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 
-def get_prefix(message):
+def get_prefix(ctx, message):
     with open('prefixes.json', 'r') as file:
         prefixes = json.load(file)
 
