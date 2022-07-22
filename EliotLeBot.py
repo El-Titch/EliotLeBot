@@ -5,16 +5,19 @@ import sys
 import json
 from discord.ext import commands
 
+intents = discord.Intents.default()
+intents.message_content = True
+
 
 def get_prefix(message):
     with open('prefixes.json', 'r') as file:
         prefixes = json.load(file)
 
+
     return prefixes[str(message.guild.id)]
 
 
-client = commands.Bot(intents = discord.Intents.default(), command_prefix = get_prefix)
-
+client = commands.Bot(command_prefix = get_prefix, intents = intents)
 
 @client.event
 async def on_guild_join(guild):
@@ -56,7 +59,7 @@ def restart_bot():
 
 @client.command(aliases=['reboot'])
 @commands.has_role("Devs")
-async def restart():
+async def restart(ctx):
     channel = client.get_channel(int(994322769632309350))   
     embed = discord.Embed(title=" 🦌  EliotLeBot Reboot  ♻️ ", description=" Eliot redémare ... Patientez 2s", color=0xEFB422)
     await channel.purge(limit=10)
@@ -89,14 +92,14 @@ async def reload(ctx, extension):
     print('Reloaded')
     await ctx.send(f'{extension} has been reloaded')
 
+@client.event
+async def on_ready():
+    for filename in os.listdir('./cogs'):
+        if filename.endswith('.py'):
+            await client.load_extension(f'cogs.{filename[:-3]}')
 
-for filename in os.listdir('./cogs'):
-    if filename.endswith('.py'):
-        client.load_extension(f'cogs.{filename[:-3]}')
-
-
-with open("Token.0", "r", encoding="utf-8") as f:
-    bottoken = f.read()
+with open("Token.0", "r", encoding="utf-8") as file:
+    bottoken = file.read()
 
 
 client.run(bottoken)
