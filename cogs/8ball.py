@@ -11,6 +11,7 @@ class _8ball(commands.Cog):
 
     @commands.command(aliases=['8ball'])
     async def _8ball(self, *, question):
+        """Apporte des réponses (aléatoire) à tes quesions"""
         responses = ["C'est certain.",
                  "C'est décidément ainsi",
                  'Sans aucun doute.',
