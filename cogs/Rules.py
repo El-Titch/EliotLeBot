@@ -1,4 +1,11 @@
+import discord
+import config
+from discord.ui import Button
+from discord.ui import View
 from discord.ext import commands
+from Utils.Utils import custom_id
+
+VIEW_NAME = "Roleview"
 
 class embed(commands.Cog):
 
@@ -9,6 +16,18 @@ class embed(commands.Cog):
     @commands.command()
     @commands.has_role(994248476055588865) # Role devs
     async def rules(self, ctx):
+        buttonf = Button(label="Accepter", emoji="☑️", custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
+        async def button_callback(interaction):
+            RoleF = interaction.guild.get_role(config.FOLLOWER_ROLE_ID)
+            if RoleF not in interaction.user.roles:
+                await interaction.user.add_roles(RoleF)
+            else:
+                await interaction.user.remove_roles(RoleF)
+
+        buttonf.callback = button_callback
+
+        view = View()
+        view.add_item(buttonf)
         await ctx.channel.purge(limit=2)
         await ctx.send("""**Réglement** 
 
@@ -43,7 +62,7 @@ class embed(commands.Cog):
 :large_orange_diamond: Les Rôles
 > • Pour votre confort, il vous est conseillé de lier vos compte twitch et dicord afin de synchroniser votre Sub.
 > • Si vous avez lu et compris le réglement du serveur, veuillez cocher la réaction :ballot_box_with_check:
-> • Si vous souhaitez être mentionné via annonces  lors des lancement de lives, veuillez cocher :twitch: """)
+> • Si vous souhaitez être mentionné via annonces  lors des lancement de lives, veuillez cocher :twitch: """, view = view)
         
 
 
