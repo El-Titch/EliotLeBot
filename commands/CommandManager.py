@@ -1,42 +1,43 @@
 import json
 
-from EliotLeBot import client
 from commands.ICmd import ICmd
+import commands.list
 
 
 def get_prefix(message):
-    with open('/prefixes.json', 'r') as file:
+    with open('prefixes.json', 'r') as file:
         prefixes = json.load(file)
-    return prefixes[str(message.guild.id)]
+    return prefixes.get(str(message.guild.id), "*")
 
 
 class CommandManager:
-    def __init__(self):
-        self.commands = ICmd.__subclasses__()
+    def __init__(self, client):
+        self.__commands_modules = ICmd.__subclasses__()
+        self.__client = client
         print("Loaded commands:")
-        for c in self.commands:
-            print(f" - {c.name}")
-        super().__init__()
+        self.__commands = []
+        for cmd in self.__commands_modules:
+            loaded_cmd = cmd()
+            self.__commands.append(loaded_cmd)
+            print(f" - {loaded_cmd.name()}")
+        self.register_message()
 
-    def get_command(self, cmd: str) -> ICmd | None:
-        for c in self.commands:
-            if c.name == cmd:
-                return c()
+    def get_command(self, cmd_name: str) -> ICmd | None:
+        for cmd in self.__commands:
+            if cmd.name() == cmd_name:
+                return cmd
         return None
 
     def handle_command(self, ctx):
-        cmd = self.get_command(ctx.content.split(" ")[0].replace(get_prefix(ctx), ""))
+        cmd = self.get_command(ctx.content.replace(get_prefix(ctx), "", 1).split(" ")[0])
         if cmd is None:
             return
-        cmd.__action__(ctx)
+        cmd.action(ctx)
 
-    @client.event
-    async def on_ready(self):
-        print("Bot is ready!")
-
-    @client.event
-    async def on_message(self, message):
-        if message.author == client.user:
-            return
-        if message.content.startswith(get_prefix(message)):
-            self.handle_command(message)
+    def register_message(self):
+        @self.__client.event
+        async def on_message(message):
+            if message.author == self.__client.user:
+                return
+            if message.content.startswith(get_prefix(message)):
+                self.handle_command(message)

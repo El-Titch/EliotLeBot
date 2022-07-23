@@ -17,3 +17,11 @@ class ICmd(abc.ABC):
     @abc.abstractmethod
     def __action__(self, ctx):
         pass
+
+    @abstractmethod
+    def description(self):
+        pass
+
+    @abstractmethod
+    def action(self, ctx):
+        pass

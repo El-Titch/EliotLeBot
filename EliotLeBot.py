@@ -1,10 +1,9 @@
 import discord
 
 
+
 intents = discord.Intents.default()
 intents.message_content = True
 
-client = discord.Client(intents=intents)
-
-
-client.run(open("Token.0", "r", encoding="utf-8").read())
+    async def on_ready(self):
+        print(f'Logged as {self.user}')

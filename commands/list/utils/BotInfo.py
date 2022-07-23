@@ -1,14 +1,13 @@
-from abc import ABC
-
 from commands.ICmd import ICmd
 
 
-class BotInfo(ICmd, ABC):
-    def __name__(self):
-        self.name = "bot-info"
+class BotInfo(ICmd):
+    def name(self):
+        return "bot-info"
 
-    def __description__(self):
-        self.description = "Show bot information's"
+    def description(self):
+        return "Show bot information's"
 
-    def __action__(self, ctx):
+    def action(self, ctx):
         print(ctx)
+        pass
