@@ -16,7 +16,7 @@ class CommandManager:
         print("Loaded commands:")
         for c in self.commands:
             print(f" - {c.name}")
-        super().__init__()
+        super().__init__(timeout=None)
 
     def get_command(self, cmd: str) -> ICmd | None:
         for c in self.commands:
@@ -30,11 +30,11 @@ class CommandManager:
             return
         cmd.__action__(ctx)
 
-    @client.event
+    @commands.Cog.listener
     async def on_ready(self):
         print("Bot is ready!")
 
-    @client.event
+    @commands.Cog.listener
     async def on_message(self, message):
         if message.author == client.user:
             return
