@@ -15,6 +15,7 @@ class Tomp3(commands.Cog):
     @commands.command(pass_context = True)
     @commands.has_role(996754221808500897) # Role de Createur desservi manuellement
     async def tomp3(self, ctx, url:str, member: discord.Member=None):
+        """Permet de mettre au format MP3 une vidéo youtube"""
         if not member:
             member = ctx.author
 
