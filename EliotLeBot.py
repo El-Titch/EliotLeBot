@@ -43,6 +43,7 @@ async def on_guild_remove(guild):
 
 @client.command()
 async def changeprefix(ctx, prefix):
+    """Change le préfix des commandes d'Eliot"""
     with open('prefixes.json', 'r') as file:
         prefixes = json.load(file)
 
@@ -60,6 +61,7 @@ def restart_bot():
 @client.command(aliases=['reboot'])
 @commands.has_role("Devs")
 async def restart(ctx):
+    """Redémarre au complet Eliot"""
     channel = client.get_channel(int(994322769632309350))   
     embed = discord.Embed(title=" 🦌  EliotLeBot Reboot  ♻️ ", description=" Eliot redémare ... Patientez 2s", color=0xEFB422)
     await channel.purge(limit=10)
@@ -71,6 +73,7 @@ async def restart(ctx):
 @client.command(aliases=['Load'])
 @commands.has_role("Devs")
 async def load(ctx, extension):
+    """Charge un cog"""
     await client.load_extension(f'cogs.{extension}')
     print('Loaded')
     await ctx.send(f'{extension} has been Loaded ')
@@ -79,6 +82,7 @@ async def load(ctx, extension):
 @client.command(aliases=['Unload'])
 @commands.has_role("Devs")
 async def unload(ctx, extension):
+    """Ferme un cog"""
     await client.unload_extension(f'cogs.{extension}')
     print('Unloaded')
     await ctx.send(f'{extension} has been Unloaded')
@@ -87,6 +91,7 @@ async def unload(ctx, extension):
 @client.command(aliases=['Reload'])
 @commands.has_role("Devs")
 async def reload(ctx, extension):
+    """Recharge un cog"""
     await client.unload_extension(f'cogs.{extension}')
     await client.load_extension(f'cogs.{extension}')
     print('Reloaded')
