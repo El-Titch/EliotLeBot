@@ -15,20 +15,21 @@ class embed(commands.Cog):
 
     @commands.command()
     async def rules(self, ctx):
-        buttonf = Button(label="Accepter", emoji="☑️", style = discord.ButtonStyle.grey, custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
+        button_notif = Button(label="Notifications", emoji="<:twitch:998375739512598558>️", style = discord.ButtonStyle.grey, custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
 
         async def button_callback(interaction):
-            RoleF = interaction.guild.get_role(998378262856216638)
-            if interaction.user.roles != RoleF:
-                await interaction.user.add_roles(RoleF)
-                await interaction.response.send_message("Le rôle Follower vous a été attribué ", ephemeral = True)
-            elif interaction.user.roles == RoleF:
-                await interaction.user.remove_roles(998378262856216638, atomic = True)
+            Notifs = interaction.guild.get_role(998379417279680537) # Role Notifs
+            if Notifs not in interaction.user.roles:
+                await interaction.user.add_roles(Notifs)
+                await interaction.response.send_message("Le rôle Notifs vous a été attribué ", ephemeral = True)
+            else:
+                await interaction.user.remove_roles(Notifs)
+                await interaction.response.send_message("Le rôle Notifs vous a été retiré", ephemeral = True)
 
-        buttonf.callback = button_callback
+        button_notif.callback = button_callback
 
         view = View(timeout = None)
-        view.add_item(buttonf)
+        view.add_item(button_notif)
         await ctx.channel.purge(limit=2)
         await ctx.send("""**Réglement** 
 
