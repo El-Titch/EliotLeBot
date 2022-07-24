@@ -15,6 +15,7 @@ class embed(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_role(994248476055588865)
     async def rules(self, ctx):
         button_notif = Button(label="Notifications", emoji="<:twitch:998375739512598558>️", custom_id = custom_id(VIEW_NAME, config.NOTIFS_ROLE_ID))
         button_Follower = Button(label = "Accepter", emoji = "☑️", custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
