@@ -1,16 +1,15 @@
-import discord
-from discord.ext import commands 
+from discord.ext import commands
 
 client = commands.Bot
 
 class Clear(commands.Cog):
 
-    def __init__(self):
+    def __init__(self, client):
         self.client = client
 
     @commands.command(aliases=['clear'])
     @commands.has_permissions(manage_messages=True)
-    async def Clear(self, *, ctx, amount=0, member: discord.Member=None ):
+    async def Clear(self, ctx, amount=0):
         """Commande pour supprimer les messages"""
         await ctx.channel.purge(limit=amount+1)
 
