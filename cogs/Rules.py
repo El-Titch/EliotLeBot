@@ -5,6 +5,7 @@ from discord.ui import View
 from discord.ext import commands
 from Utils.Utils import custom_id
 
+
 VIEW_NAME = "Roleview"
 
 
@@ -15,9 +16,18 @@ class embed(commands.Cog):
 
     @commands.command()
     async def rules(self, ctx):
-        button_notif = Button(label="Notifications", emoji="<:twitch:998375739512598558>️", style = discord.ButtonStyle.grey, custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
+        button_notif = Button(label="Notifications", emoji="<:twitch:998375739512598558>️", custom_id = custom_id(VIEW_NAME, config.NOTIFS_ROLE_ID))
+        button_Follower = Button(label = "Accepter", emoji = "☑️", custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
 
-        async def button_callback(interaction):
+        async def Fbutton_callback(interaction):
+            Follower = interaction.guild.get_role(998378262856216638)  # Role Follower
+            if Follower not in interaction.user.roles:
+                await interaction.user.add_roles(Follower)
+                await interaction.response.send_message(content = "Vous avez accepté le règlement, bienvenue !", ephemeral = True)
+            else:
+                await interaction.response.send_message(content = "Vous avez déjà accepté le règlement !", ephemeral = True)
+
+        async def Nbutton_callback(interaction):
             Notifs = interaction.guild.get_role(998379417279680537) # Role Notifs
             if Notifs not in interaction.user.roles:
                 await interaction.user.add_roles(Notifs)
@@ -26,9 +36,12 @@ class embed(commands.Cog):
                 await interaction.user.remove_roles(Notifs)
                 await interaction.response.send_message("Le rôle Notifs vous a été retiré", ephemeral = True)
 
-        button_notif.callback = button_callback
+        button_Follower.callback = Fbutton_callback
+        button_notif.callback = Nbutton_callback
+
 
         view = View(timeout = None)
+        view.add_item(button_Follower)
         view.add_item(button_notif)
         await ctx.channel.purge(limit=2)
         await ctx.send("""**Réglement** 
