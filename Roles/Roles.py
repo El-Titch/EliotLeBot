@@ -1,4 +1,4 @@
-from .RolesView import Roleview
+from Roles.RolesView import Roleview
 from discord.ext import commands
 
 
