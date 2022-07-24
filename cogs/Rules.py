@@ -76,8 +76,8 @@ class embed(commands.Cog):
 
 :large_orange_diamond: Les Rôles
 > • Pour votre confort, il vous est conseillé de lier vos compte twitch et dicord afin de synchroniser votre Sub.
-> • Si vous avez lu et compris le réglement du serveur, veuillez cocher la réaction :ballot_box_with_check:
-> • Si vous souhaitez être mentionné via annonces  lors des lancement de lives, veuillez cocher :twitch: """, view = view)
+> • Si vous avez lu et compris le réglement du serveur, veuillez cliquer sur le bouton :ballot_box_with_check: Accepter.
+> • Si vous souhaitez être mentionné via annonces  lors des lancement de lives, veuillez cliquer sur le bouton <:twitch:998375739512598558> Notifications.""", view = view)
 
 
 intents = discord.Intents.default()
