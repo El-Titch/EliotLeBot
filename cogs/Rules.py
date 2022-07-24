@@ -7,26 +7,27 @@ from Utils.Utils import custom_id
 
 VIEW_NAME = "Roleview"
 
+
 class embed(commands.Cog):
 
     def __init__(self, client):
         self.client = client
 
-
     @commands.command()
-    @commands.has_role(994248476055588865) # Role devs
     async def rules(self, ctx):
-        buttonf = Button(label="Accepter", emoji="☑️", custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
+        buttonf = Button(label="Accepter", emoji="☑️", style = discord.ButtonStyle.grey, custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
+
         async def button_callback(interaction):
-            RoleF = interaction.guild.get_role(config.FOLLOWER_ROLE_ID)
-            if RoleF not in interaction.user.roles:
+            RoleF = interaction.guild.get_role(998378262856216638)
+            if interaction.user.roles != RoleF:
                 await interaction.user.add_roles(RoleF)
-            else:
-                await interaction.user.remove_roles(RoleF)
+                await interaction.response.send_message("Le rôle Follower vous a été attribué ", ephemeral = True)
+            elif interaction.user.roles == RoleF:
+                await interaction.user.remove_roles(998378262856216638, atomic = True)
 
         buttonf.callback = button_callback
 
-        view = View()
+        view = View(timeout = None)
         view.add_item(buttonf)
         await ctx.channel.purge(limit=2)
         await ctx.send("""**Réglement** 
@@ -63,7 +64,10 @@ class embed(commands.Cog):
 > • Pour votre confort, il vous est conseillé de lier vos compte twitch et dicord afin de synchroniser votre Sub.
 > • Si vous avez lu et compris le réglement du serveur, veuillez cocher la réaction :ballot_box_with_check:
 > • Si vous souhaitez être mentionné via annonces  lors des lancement de lives, veuillez cocher :twitch: """, view = view)
-        
+
+
+intents = discord.Intents.default()
+intents.members = True
 
 
 async def setup(client):
