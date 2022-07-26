@@ -1,20 +1,29 @@
+import discord
+from discord import Embed
 from discord.ext import commands
 
+client = commands.Bot (command_prefix = "*", intents = discord.Intents.default())
 
-class MyHelpCommand(commands.MinimalHelpCommand):
-	def get_command_signature(self, command):
-		return '{0.clean_prefix}{1.qualified_name}{1.signature}'.format(self, command)
+class MyHelp(commands.MinimalHelpCommand):
+	async def send_pages(self):
+		destination = self.get_destination()
+		for page in self.paginator.pages:
+			embed = Embed(description = page)
+			await destination.send(embed = embed)
 
-class HelpCog(commands.Cog, name = 'Help'):
 
+
+
+class MyCog (commands.Cog):
 	def __init__(self, client):
+		self.client = client
 		self._original_help_command = client.help_command
-		client.help_command = MyHelpCommand()
+		client.help_command = MyHelp()
 		client.help_command.cog = self
 
-	async def cog_unload(self):
+
+	def cog_unload(self):
 		self.client.help_command = self._original_help_command
 
-
-async def setup(client: commands.Bot):
-	await client.add_cog(HelpCog(client))
+async def setup(client):
+	await client.add_cog(MyCog(client))
