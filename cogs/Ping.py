@@ -7,6 +7,7 @@ class Ping(commands.Cog):
         self.client = client
 
     @commands.command(aliases=['ping'])
+    @commands.has_role("Devs")
     async def Ping(self, ctx):
         await ctx.send(f'Delay of {round(self.client.latency * 1000)}ms')
 
