@@ -3,3 +3,4 @@ reglement.txt
 __pycache__/
 cogs/__pycache__/
 .idea/
+config.json
