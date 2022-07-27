@@ -69,7 +69,7 @@ class MyHelp(commands.HelpCommand):
 	send_group_help = send_command_help
 
 
-class MyCog (commands.Cog):
+class Help(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 		self._original_help_command = client.help_command
@@ -81,4 +81,4 @@ class MyCog (commands.Cog):
 		self.client.help_command = self._original_help_command
 
 async def setup(client):
-	await client.add_cog(MyCog(client))
+	await client.add_cog(Help(client))
