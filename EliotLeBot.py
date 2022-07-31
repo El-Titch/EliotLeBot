@@ -1,9 +1,11 @@
+import asyncio
 import time
 import discord
 import os
 import sys
 import json
 from discord.ext import commands
+from discord.ext.tasks import loop
 
 intents = discord.Intents.default()
 intents.message_content = True
