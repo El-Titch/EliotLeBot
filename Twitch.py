@@ -1,6 +1,5 @@
 import json
 from datetime import datetime
-
 import requests
 
 with open("config.json") as config_file:
@@ -44,26 +43,7 @@ def get_streams(users):
 	response = requests.get("https://api.twitch.tv/helix/streams", params = params, headers = headers)
 	return {entry["user_login"]: entry for entry in response.json()["data"]}
 
-online_users = {}
-
-def get_notifications():
-	users = get_users(config["watchlist"])
-	streams = get_streams(users)
-
-	notifications = []
-	for user_name in config["watchlist"]:
-		if user_name not in online_users:
-			online_users[user_name] = datetime.utcnow()
 
 
 
-		if user_name not in streams:
-			online_users[user_name] = None
-		else:
-			started_at = datetime.strptime(streams[user_name]["started_at"], "Y%-%m-%dT%H:M:%SZ")
-			if online_users[user_name] is None or started_at > online_users[user_name]:
-				notifications.append(streams[user_name])
-				online_users[user_name] = started_at
-
-	return notifications
 
