@@ -46,7 +46,7 @@ class NetNotifs(commands.Cog):
 			embed.set_image(url = 'https://static-cdn.jtvnw.net/previews-ttv/live_user_eltitch_-320x180.jpg')
 			embed.set_footer(text = f'{timestamp.strftime(r"%I:%M %p")}  {entry["language"]}')
 			await ctx.channel.purge(limit = 1)
-			await channel.send(content = "Salut @Notifs ! Je suis enstreamn n'hésite pas à passer !",embed = embed, view = view)
+			await channel.send(content = "Salut <@&998379417279680537> ! Je suis enstreamn n'hésite pas à passer !",embed = embed, view = view)
 
 
 
