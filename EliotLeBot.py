@@ -44,6 +44,7 @@ async def on_guild_remove(guild):
 
 
 @client.command()
+@commands.has_permissions(administrator = True)
 async def changeprefix(ctx, prefix):
     """Change le préfix des commandes d'Eliot"""
     with open('prefixes.json', 'r') as file:
@@ -61,7 +62,7 @@ def restart_bot():
 
 
 @client.command(aliases=['reboot'])
-@commands.has_role("Devs")
+@commands.has_permissions(administrator = True)
 async def restart(ctx):
     """Redémarre au complet Eliot"""
     channel = client.get_channel(int(994322769632309350))   
@@ -73,7 +74,7 @@ async def restart(ctx):
 
 
 @client.command(aliases=['Load'])
-@commands.has_role("Devs")
+@commands.has_permissions(administrator = True)
 async def load(ctx, extension):
     """Charge un cog"""
     await client.load_extension(f'cogs.{extension}')
@@ -82,7 +83,7 @@ async def load(ctx, extension):
 
 
 @client.command(aliases=['Unload'])
-@commands.has_role("Devs")
+@commands.has_permissions(administrator = True)
 async def unload(ctx, extension):
     """Ferme un cog"""
     await client.unload_extension(f'cogs.{extension}')
@@ -91,7 +92,7 @@ async def unload(ctx, extension):
 
 
 @client.command(aliases=['Reload'])
-@commands.has_role("Devs")
+@commands.has_permissions(administrator = True)
 async def reload(ctx, extension):
     """Recharge un cog"""
     await client.unload_extension(f'cogs.{extension}')
