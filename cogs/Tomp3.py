@@ -13,13 +13,13 @@ class Tomp3(commands.Cog):
 
 
     @commands.command(pass_context = True)
-    @commands.has_role(996754221808500897) # Role de Createur desservi manuellement
+    @commands.has_role("Createur") # Role de Createur desservi manuellement
     async def tomp3(self, ctx, url:str, member: discord.Member=None):
         """Permet de mettre au format MP3 une vidéo youtube"""
         if not member:
             member = ctx.author
 
-        if ctx.channel.id != 996749052668547204: # Channel mp3 downloader
+        if ctx.channel.id != 1004478381515092168: # Channel mp3 downloader
             await ctx.channel.purge(limit=1)
             await ctx.send(content="Veuillez effectuer cette commande dans le channel prévu à cet effet. *#mp3-downloader* ")  
             return
