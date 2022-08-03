@@ -9,9 +9,10 @@ class _8ball(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=['8ball'])
-    async def _8ball(self, *, question):
+    @commands.command(aliases = ['8ball'])
+    async def _8ball(self, ctx, *, question):
         """Apporte des réponses (aléatoire) à tes quesions"""
+        channel = self.client.get_channel(1004505789177802772)
         responses = ["C'est certain.",
                  "C'est décidément ainsi",
                  'Sans aucun doute.',
@@ -30,8 +31,7 @@ class _8ball(commands.Cog):
                  'Mes sources disent Non.',
                  'Les perspectives ne sont pas favorable.',
                  'Il y a beaucoup de doute.']
-        channel = self.client.get_channel(int(992790270875799662)) # channel spécifique au 8ball
-        await channel.send(f'Question: {question}\nAnswer: {random.choice(responses)}')
+        await channel.send(f'Question: {question}\nRéponse: {random.choice(responses)}')
 
 
 async def setup(client):
