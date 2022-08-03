@@ -19,6 +19,7 @@ class NetNotifs(commands.Cog):
 	@commands.command()
 	@commands.has_permissions(administrator = True)
 	async def twitch(self, ctx, member: discord.Member = None):
+		"""Permet d'envoyer une notification du stream"""
 		button = Button(label = 'Twitch', emoji = "<:twitch:998375739512598558>️", url = 'https://twitch.tv/eltitch_')
 		if not member:
 			member = ctx.author
