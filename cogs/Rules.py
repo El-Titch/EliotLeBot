@@ -15,13 +15,13 @@ class embed(commands.Cog):
         self.client = client
 
     @commands.command()
-    @commands.has_role(994248476055588865)
+    @commands.has_permissions(administrator = True)
     async def rules(self, ctx):
         button_notif = Button(label="Notifications", emoji="<:twitch:998375739512598558>️", custom_id = custom_id(VIEW_NAME, config.NOTIFS_ROLE_ID))
         button_Follower = Button(label = "Accepter", emoji = "☑️", custom_id = custom_id(VIEW_NAME, config.FOLLOWER_ROLE_ID))
 
         async def Fbutton_callback(interaction):
-            Follower = interaction.guild.get_role(998378262856216638)  # Role Follower
+            Follower = interaction.guild.get_role(484334110114971660)  # Role Follower
             if Follower not in interaction.user.roles:
                 await interaction.user.add_roles(Follower)
                 await interaction.response.send_message(content = "Vous avez accepté le règlement, bienvenue !", ephemeral = True)
@@ -29,7 +29,7 @@ class embed(commands.Cog):
                 await interaction.response.send_message(content = "Vous avez déjà accepté le règlement !", ephemeral = True)
 
         async def Nbutton_callback(interaction):
-            Notifs = interaction.guild.get_role(998379417279680537) # Role Notifs
+            Notifs = interaction.guild.get_role(1004494417601777725) # Role Notifs
             if Notifs not in interaction.user.roles:
                 await interaction.user.add_roles(Notifs)
                 await interaction.response.send_message("Le rôle Notifs vous a été attribué ", ephemeral = True)
@@ -61,8 +61,9 @@ class embed(commands.Cog):
 > • Les Pseudonymes et Photos de profils indécentes sont interdites
 
 :writing_hand: ** A L'écrit**
-> • Mentionner un membre du staff de manière abusive est interdite
+> • Mentionner un membre du staff de manière abusive (spam sans raison) est interdite
 > • Le Spam n'est ni utle, ni agréable. Il est donc proscrit.
+> • Toute demande d'attribution de Role Createur devra se faire dans le channel <#demande-role> (raison nécesaire)
 
 :speaking_head: ** A L'oral**
 > • L'utilisation de modificateur de voix et/ou de soundboard est interdite.
