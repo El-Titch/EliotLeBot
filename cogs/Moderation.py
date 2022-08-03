@@ -66,7 +66,7 @@ class Moderation(commands.Cog):
         await ctx.send(f'Unbanned {user}')
 
     @commands.command(aliases = ['Mute'])
-    @commands.has_permissions()
+    @commands.has_permissions(kick_members = True)
     async def mute(self, member: discord.Member, *, duration: DurationConverter):
         """Permet de temporairement rendre muet un membre du discord  """
         role = get(member.guild.roles, name = "Muted")
