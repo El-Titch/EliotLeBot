@@ -8,6 +8,7 @@ class PermissionsChecker(commands.Cog):
     @commands.command(name='perms', aliases=['perms_for', 'permissions'])
     @commands.guild_only()
     async def check_permissions(self, ctx, *, member: discord.Member=None):
+        """Permet d'afficher les permissions d'un membre"""
         if not member:
             member = ctx.author
 
